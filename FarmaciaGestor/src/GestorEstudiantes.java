@@ -31,8 +31,9 @@ public class GestorEstudiantes {
             System.out.println("1. Añadir estudiante");
             System.out.println("2. Listar estudiantes");
             System.out.println("3. Buscar estudiante por nombre");
-            System.out.println("4. Salir");
-            System.out.println("5. Calcular media de todas las notas");
+            System.out.println("4. Calcular media de todas las notas");
+            System.out.println("5. Mostrar el estudiante con la mejor nota");
+            System.out.println("6. Salir");
             System.out.print("Elige una opción: ");
             opcion = sc.nextInt();
             sc.nextLine();
@@ -41,12 +42,13 @@ public class GestorEstudiantes {
                 case 1 -> anadirEstudiante();
                 case 2 -> listarEstudiantes();
                 case 3 -> buscarPorNombre();
-                case 4 -> System.out.println("Saliendo...");
-                case 5 -> calcularMediaGeneral();
+                case 4 -> calcularMediaGeneral();
+                case 5 -> mostrarMejorEstudiante();
+                case 6 -> System.out.println("Saliendo del programa...");
                 default -> System.out.println("Opción no válida.");
             }
 
-        } while (opcion != 4);
+        } while (opcion != 6);
     }
 
     //añadir estudiante
@@ -107,5 +109,20 @@ public class GestorEstudiantes {
         double media = suma / total;
         System.out.println("La media general es: " + media);
     }
+    static void mostrarMejorEstudiante() {
+        if (total == 0) {
+            System.out.println("No hay estudiantes registrados.");
+            return;
+        }
 
+        Estudiante mejor = estudiantes[0];
+        for (int i = 1; i < total; i++) {
+            if (estudiantes[i].nota > mejor.nota) {
+                mejor = estudiantes[i];
+            }
+        }
+
+        System.out.println("El estudiante con mejor nota es:");
+        System.out.println(mejor);
+    }
 }
